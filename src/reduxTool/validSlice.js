@@ -11,7 +11,6 @@ export const validSlice = createSlice({
     isValidUser: (state) => {
       state.value = true;
     },
-    
   },
 })
 export const { isValidUser } = validSlice.actions
