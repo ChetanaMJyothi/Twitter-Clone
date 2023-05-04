@@ -1,0 +1,54 @@
+.errorMsg{
+    color: red;
+    font-size: 14px;
+}
+
+.main{
+margin: auto;
+display: flex;
+justify-content: center;
+margin-top: 100px;
+text-align: center;
+}
+
+.button{
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  margin-top: 38px;
+  margin-bottom: 30px;
+  text-align: center;
+  width: 500px;
+}
+.input {
+        background-color: #303245;
+        border-radius: 12px;
+        border: 0;
+        box-sizing: border-box;
+        color: #eee;
+        font-size: 18px;
+        height: 50px;
+        outline: 0;
+        padding: 4px 20px 0;
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        margin-bottom: 10px;
+}
+p{
+    display: inline;
+}
+a{
+color: #08d;
+margin-left: 10px;
+text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
