@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   value: false,
+  emailId:"",
 }
 
 export const validSlice = createSlice({
@@ -11,8 +12,11 @@ export const validSlice = createSlice({
     isValidUser: (state) => {
       state.value = true;
     },
+    userName:(state, action)=>{
+      state.emailId =action.payload;
+    }
   },
 })
-export const { isValidUser } = validSlice.actions
+export const { isValidUser, userName } = validSlice.actions
 
 export default validSlice.reducer

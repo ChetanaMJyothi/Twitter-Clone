@@ -9,13 +9,13 @@ import SignUpPage from './signUpPage';
 
 const router=createBrowserRouter([
 { path: '/',
-element: <div className="App">
+element: <div>
+<NavBar></NavBar>
 <div className="App">
 <Sidebar/>
 <Feed/>
 <Widgets/>
 </div>
-<NavBar></NavBar>
 </div>, 
 },
 {

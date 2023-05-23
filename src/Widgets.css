@@ -1,8 +1,6 @@
 .widgets {
-  flex: 0.3;
   overflow-y: scroll;
-  min-width: fit-content;
-
+width: 400px;
 }
 
 .widgets__input {

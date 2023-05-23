@@ -19,7 +19,7 @@ export default function FormDialog(props) {
     <div>
       
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Add Comment</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Replying to @ {props.value}

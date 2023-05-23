@@ -11,26 +11,49 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import './TweetBox.css' 
 import {db} from './firebase.js';
 import { collection, addDoc } from "firebase/firestore";
+import { useSelector } from 'react-redux'
+import  { useEffect } from 'react';
+import { query, onSnapshot } from "firebase/firestore";
 
 function TweetBox() {
-
+  const emailId = useSelector((state) => state.counter.emailId)
   const [tweetMsg, setTweetMsg]=useState("");
+  const [userName, setuserName]=useState([]);
+  const [emailStr, setEmailStr]=useState("");
+  useEffect(()=>{ 
+    const q = query(collection(db, "tweetBox"));
+    console.log(q);
+    onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if(doc.data().email===emailId){
+        console.log(doc.data().email);
+          setuserName(doc.data().userName);
+          const emailString=doc.data().email;
+          const index=emailString.indexOf("@");
+          const str=emailString.substring(0,index);
+          console.log(str);
+          setEmailStr(str);
+        }
+      });    
+    });   
+  },[emailId]);
   function msgHandler(event){
     setTweetMsg(event.target.value);
   }
   function sendMsg(event){
     event.preventDefault();
-    uploadData(tweetMsg);
+    uploadData();
   }
 
-  async function uploadData(tweetMsg){
+  async function uploadData(){
     await addDoc(collection(db, "posts"),{
-      displayName:"Chetana M Jyothi",
-      username:"Chetanamj",
-      verified:true,
+      displayName:userName,
+      username:emailStr,
+      verified:false,
       text:tweetMsg,
       isLiked:false,
       likeCount: 0,
+      cmtCount:0,
       avatar:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
     });
     setTweetMsg("");

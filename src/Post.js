@@ -9,22 +9,31 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FormDialog from './FormDialog';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import { useSelector } from 'react-redux'
+import SignPopUp from './SignPopUp.js';
 
 const Post = forwardRef((props,ref)=>
+
   { 
   const isUserAuth = useSelector((state) => state.counter.value)
     const [liked, setLiked]=useState(false);
     const [noLike, setNoLike] = useState(props.likeCount);
     const [cmtCount, setCmtCount] = useState(props.cmtCount);
     const [dialog, setDialog] = useState(false);
+    const [open, setOpen]=useState(false);
+    
     function commentHandler(){
       if(isUserAuth){
-    setDialog(true); 
-      }  
+      setDialog(true); 
+      } 
+      else{
+        setOpen(!open);
+      }
     }
     function cmtCountHandler(){
       setCmtCount((prevCount)=>{
         return prevCount+1})
+      setDialog(false); 
+
     }
     function likeHandler(e){
       if(isUserAuth){
@@ -41,9 +50,18 @@ const Post = forwardRef((props,ref)=>
       })
     }
     }
+    else{
+      setOpen(!open);
+    }
   }
+  function openHandler(){
+    setOpen(!open);
+  }
+ 
   return (
     <div className='post' ref={ref}>
+      {open && <SignPopUp onClick={openHandler} ></SignPopUp>}
+
       <div className='post__avatar'>
        <Avatar src={props.avatar} alt=""></Avatar>
     </div>
@@ -71,9 +89,9 @@ const Post = forwardRef((props,ref)=>
       <PublishIcon fontSize="small" />
       </div> 
     </div>
-    {dialog && <FormDialog onOpen={cmtCountHandler} value={props.username}></FormDialog>  }
+    {dialog && <FormDialog onOpen={cmtCountHandler} value={props.username}></FormDialog>}
     </div>
   )
-}
+  }
 )
 export default Post;

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import './loginPage.css';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
-import { isValidUser } from './reduxTool/validSlice.js'
+import { isValidUser, userName } from './reduxTool/validSlice.js'
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 function LoginPage () {
@@ -14,31 +14,33 @@ function LoginPage () {
     const[password, setPassword]=useState(""); 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    
     function emailHandler(e){
         setEmail(e.target.value);
     }
     function passwordHandler(e){
         setPassword(e.target.value);
     }
+    
     function submitHandler(e){
         e.preventDefault();
         console.log(email, password);
         signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    console.log(userCredential);
-    const user = userCredential.user;
-    console.log(user);
-    setError(false);
-    dispatch(isValidUser());
-    navigate("/");
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage)
-    setError(true);
-  });
+    .then((userCredential) => {
+        console.log(userCredential);
+        const user = userCredential.user;
+        console.log(user.email);
+        setError(false);
+        dispatch(isValidUser());
+        dispatch(userName(user.email));
+        navigate("/");
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage)
+        setError(true);
+     });
         setEmail("");
         setPassword("");
     } 

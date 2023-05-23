@@ -11,9 +11,20 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import './Sidebar.css';
 import Button from '@mui/material/Button';
+/* import { useState } from 'react';
+import SignPopUp from './SignPopUp.js'; */
 function Sidebar() {
+  /* const [open, setOpen]=useState(false);
+  function openHandler(){
+  setOpen(!open);
+  } */
+  
   return (
+
     <div className="sidebar">
+    {/*   <SignPopUp onClick={openHandler}></SignPopUp> */}
+   {/*  <button onClick={openHandler}>open</button> */}
+
      <TwitterIcon className='sidebar__twitterIcon'/> 
      <SidebarOption active Icon={HomeIcon} text='Home'></SidebarOption>
      <SidebarOption Icon={SearchIcon} text='Explore'></SidebarOption>

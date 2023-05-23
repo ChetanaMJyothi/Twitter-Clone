@@ -12,6 +12,7 @@ function Feed() {
   const [posts, setPosts]=useState([]);
    useEffect(()=>{  
     const q = query(collection(db, "posts"));
+    console.log(q);
     onSnapshot(q, (querySnapshot) => {
       setPosts([]);
       querySnapshot.forEach((doc) => {
@@ -40,6 +41,7 @@ console.log(posts);
    {isUserAuth && <TweetBox />}
     <FlipMove>
      {posts.map(post=>{
+      console.log(post.cmtCount)
       return(
       <Post
     key={post.text}
